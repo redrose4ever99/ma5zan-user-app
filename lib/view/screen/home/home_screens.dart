@@ -22,7 +22,8 @@ import 'package:flutter_makzan_ecommerce/view/basewidget/title_row.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/brand/all_brand_screen.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/cart/cart_screen.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/category/all_category_screen.dart';
-import 'package:flutter_makzan_ecommerce/view/screen/category/supermarket_screen.dart';
+import 'package:flutter_makzan_ecommerce/view/screen/category/all_supermarket_screen.dart';
+
 import 'package:flutter_makzan_ecommerce/view/screen/featureddeal/featured_deal_screen.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/home/widget/announcement.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/home/widget/banners_view.dart';
@@ -62,6 +63,8 @@ class _HomePageState extends State<HomePage> {
         .getMainSectionBanner(context);
     await Provider.of<CategoryProvider>(context, listen: false)
         .getCategoryList(reload, context);
+    await Provider.of<CategoryProvider>(context, listen: false)
+        .getSupermarketList(reload, context);
     await Provider.of<HomeCategoryProductProvider>(context, listen: false)
         .getHomeCategoryProductList(reload, context);
     await Provider.of<TopSellerProvider>(context, listen: false)
@@ -120,7 +123,6 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: RefreshIndicator(
-          backgroundColor: Theme.of(context).primaryColor,
           onRefresh: () async {
             await _loadData(context, true);
             await Provider.of<FlashDealProvider>(context, listen: false)
@@ -140,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                     centerTitle: false,
                     automaticallyImplyLeading: false,
                     backgroundColor: Theme.of(context).highlightColor,
-                    title: Image.asset(Images.logo_with_name_image, height: 35),
+                    title: Image.asset(Images.logo_with_name_image,height: 35,),
                     actions: [
                       Padding(
                         padding: const EdgeInsets.only(right: 12.0),
@@ -253,26 +255,27 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           BannersView(),
                           SizedBox(height: Dimensions.HOME_PAGE_PADDING),
-//subermarket
-
-                          // Padding(
-                          //   padding: const EdgeInsets.symmetric(
-                          //       horizontal:
-                          //           Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,
-                          //       vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                          //   child: TitleRow(
-                          //       title: getTranslated('supermarket', context),
-                          //       onTap: () => Navigator.push(
-                          //           context,
-                          //           MaterialPageRoute(
-                          //               builder: (_) => SupermarketScreen()))),
-                          // ),
-                          // SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(
-                          //       bottom: Dimensions.HOME_PAGE_PADDING),
-                          //   child: CategorySuperView(isHomePage: true),
-                          // ),
+//subermarket title: getTranslated('supermarket', context),
+                          //supermarket
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal:
+                                    Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL,
+                                vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                            child: TitleRow(
+                                title: getTranslated('supermarket', context),
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            AllSupermarketScreen()))),
+                          ),
+                          SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: Dimensions.HOME_PAGE_PADDING),
+                            child: SupermarketView(isHomePage: true),
+                          ),
 
                           // Category
                           Padding(
@@ -377,6 +380,7 @@ class _HomePageState extends State<HomePage> {
                               : SizedBox(),
 
                           //top seller
+                          /*
                           singleVendor
                               ? SizedBox()
                               : TitleRow(
@@ -401,7 +405,7 @@ class _HomePageState extends State<HomePage> {
                                       bottom: Dimensions.HOME_PAGE_PADDING),
                                   child: TopSellerView(isHomePage: true),
                                 ),
-
+*/
                           //footer banner
                           Consumer<BannerProvider>(
                               builder: (context, footerBannerProvider, child) {

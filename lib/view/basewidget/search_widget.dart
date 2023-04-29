@@ -44,8 +44,8 @@ class SearchWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.all(
-                         Radius.circular(Dimensions.PADDING_SIZE_SMALL),
-                       )),
+                      Radius.circular(Dimensions.PADDING_SIZE_SMALL),
+                    )),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: isSeller
@@ -113,11 +113,9 @@ class SearchWidget extends StatelessWidget {
                 height: 50,
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                        topRight:
-                            Radius.circular(Dimensions.PADDING_SIZE_SMALL),
-                        bottomRight:
-                            Radius.circular(Dimensions.PADDING_SIZE_SMALL))),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(Dimensions.PADDING_SIZE_SMALL),
+                    )),
                 child: Icon(Icons.search,
                     color: Theme.of(context).cardColor,
                     size: Dimensions.ICON_SIZE_SMALL),

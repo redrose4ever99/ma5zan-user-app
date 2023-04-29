@@ -64,7 +64,7 @@ class AddressListScreen extends StatelessWidget {
                                         children: [
                                           ListTile(
                                             title: Text(
-                                                'Address: ${profileProvider.shippingAddressList[index].address}' ??
+                                                'عنوان: ${profileProvider.shippingAddressList[index].address}' ??
                                                     ""),
                                             subtitle: Row(
                                               children: [
@@ -73,12 +73,18 @@ class AddressListScreen extends StatelessWidget {
                                                 SizedBox(
                                                     width: Dimensions
                                                         .PADDING_SIZE_DEFAULT),
-                                                Text(
-                                                    '${getTranslated('zip', context)} : ${profileProvider.shippingAddressList[index].zip ?? ""}'),
+                                                Visibility(
+                                                  visible: true,
+                                                  child: Text(
+                                                      '${getTranslated('zip', context)} : ${profileProvider.shippingAddressList[index].zip ?? ""}'),
+                                                ),
                                               ],
                                             ),
                                             trailing: IconButton(
                                               icon: Icon(Icons.delete_forever,
+                                                  size: Dimensions
+                                                          .PADDING_SIZE_DEFAULT *
+                                                      3,
                                                   color: Colors.red),
                                               onPressed: () {
                                                 showCustomModalDialog(

@@ -14,7 +14,7 @@ import 'package:flutter_makzan_ecommerce/view/basewidget/animated_custom_dialog.
 import 'package:flutter_makzan_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_makzan_ecommerce/view/basewidget/guest_dialog.dart';
 import 'package:flutter_makzan_ecommerce/view/basewidget/rating_bar.dart';
-import 'package:flutter_makzan_ecommerce/view/basewidget/search_widget.dart';
+
 import 'package:flutter_makzan_ecommerce/view/screen/chat/chat_screen.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/home/widget/products_view.dart';
 import 'package:provider/provider.dart';
@@ -164,46 +164,40 @@ class _SellerScreenState extends State<SellerScreen> {
                           ],
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          if (!Provider.of<AuthProvider>(context, listen: false)
-                              .isLoggedIn()) {
-                            showAnimatedDialog(context, GuestDialog(),
-                                isFlip: true);
-                          } else if (widget.seller != null) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => ChatScreen(
-                                          id: widget.seller.seller.id,
-                                          name: widget.seller.seller.shop.name,
-                                        )));
-                          }
-                        },
-                        icon: Image.asset(Images.chat_image,
-                            color: ColorResources.SELLER_TXT,
-                            height: Dimensions.ICON_SIZE_DEFAULT),
+                      Visibility(
+                        visible: false,
+                        child: IconButton(
+                          onPressed: () {
+                            if (!Provider.of<AuthProvider>(context,
+                                    listen: false)
+                                .isLoggedIn()) {
+                              showAnimatedDialog(context, GuestDialog(),
+                                  isFlip: true);
+                            } else if (widget.seller != null) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => ChatScreen(
+                                            id: widget.seller.seller.id,
+                                            name:
+                                                widget.seller.seller.shop.name,
+                                          )));
+                            }
+                          },
+                          icon: Image.asset(Images.chat_image,
+                              color: ColorResources.SELLER_TXT,
+                              height: Dimensions.ICON_SIZE_DEFAULT),
+                        ),
                       ),
                     ]),
                   ]),
                 ),
                 SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-                Visibility(
-                  visible: false,
-                  child: Padding(
+                Padding(
                     padding: EdgeInsets.only(
                         left: Dimensions.PADDING_SIZE_SMALL,
                         right: Dimensions.PADDING_SIZE_EXTRA_EXTRA_SMALL),
-                    child: SearchWidget(
-                      hintText: 'Search product...',
-                      onTextChanged: (String newText) =>
-                          Provider.of<ProductProvider>(context, listen: false)
-                              .filterData(newText),
-                      onClearPressed: () {},
-                      isSeller: true,
-                    ),
-                  ),
-                ),
+                    child: Container()),
 
                 Padding(
                   padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),

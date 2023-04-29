@@ -62,13 +62,13 @@ class ProductWidget extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   placeholder: Images.placeholder,
                   fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.width / 2.45,
+                  height: MediaQuery.of(context).size.width / 3,
                   image:
                       '${Provider.of<SplashProvider>(context, listen: false).baseUrls.productThumbnailUrl}/${productModel.thumbnail}',
                   imageErrorBuilder: (c, o, s) => Image.asset(
                       Images.placeholder_1x1,
                       fit: BoxFit.cover,
-                      height: MediaQuery.of(context).size.width / 2.45),
+                      height: MediaQuery.of(context).size.width / 10),
                 ),
               ),
             ),
@@ -94,19 +94,22 @@ class ProductWidget extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis),
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RatingBar(
-                              rating: double.parse(ratting),
-                              size: 18,
-                            ),
-                            Text(
-                                '(${productModel.reviewCount.toString() ?? 0})',
-                                style: robotoRegular.copyWith(
-                                  fontSize: Dimensions.FONT_SIZE_SMALL,
-                                )),
-                          ]),
+                    Visibility(
+                      visible: false,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RatingBar(
+                            rating: double.parse(ratting),
+                            size: 18,
+                          ),
+                          Text(
+                              '(${productModel.reviewCount.toString() ?? 0})',
+                              style: robotoRegular.copyWith(
+                                fontSize: Dimensions.FONT_SIZE_SMALL,
+                              )),
+                        ]),),
+
                       SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
                       productModel.discount != null && productModel.discount > 0
                           ? Text(

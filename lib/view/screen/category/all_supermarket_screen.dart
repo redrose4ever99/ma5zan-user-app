@@ -12,7 +12,7 @@ import 'package:flutter_makzan_ecommerce/view/basewidget/custom_app_bar.dart';
 import 'package:flutter_makzan_ecommerce/view/screen/product/brand_and_category_product_screen.dart';
 import 'package:provider/provider.dart';
 
-class SupermarketScreen extends StatelessWidget {
+class AllSupermarketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,19 +46,22 @@ class SupermarketScreen extends StatelessWidget {
                           itemCount: categoryProvider.supermarketList.length,
                           padding: EdgeInsets.all(0),
                           itemBuilder: (context, index) {
-                            SubCategory _category =
+                            Category _category =
                                 categoryProvider.supermarketList[index];
                             return InkWell(
                               onTap: () => Provider.of<CategoryProvider>(
                                       context,
                                       listen: false)
                                   .changeSelectedIndex(index),
-                              child: CategoryItem(
-                                title: _category.name,
-                                icon: _category.icon,
-                                isSelected:
-                                    categoryProvider.categorySelectedIndex ==
-                                        index,
+                              child: Visibility(
+                                visible: (_category.id != 2),
+                                child: CategoryItem(
+                                  title: _category.name,
+                                  icon: _category.icon,
+                                  isSelected:
+                                      categoryProvider.categorySelectedIndex ==
+                                          index,
+                                ),
                               ),
                             );
                           },
@@ -68,7 +71,7 @@ class SupermarketScreen extends StatelessWidget {
                           child: ListView.builder(
                         padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                         itemCount: categoryProvider
-                                .categoryList[
+                                .supermarketList[
                                     categoryProvider.categorySelectedIndex]
                                 .subCategories
                                 .length +
@@ -77,7 +80,9 @@ class SupermarketScreen extends StatelessWidget {
                           SubCategory _subCategory;
                           if (index != 0) {
                             _subCategory = categoryProvider
-                                .categoryList[2].subCategories[index - 1];
+                                .supermarketList[
+                                    categoryProvider.categorySelectedIndex]
+                                .subCategories[index - 1];
                           }
                           if (index == 0) {
                             return Ink(
@@ -96,13 +101,15 @@ class SupermarketScreen extends StatelessWidget {
                                               BrandAndCategoryProductScreen(
                                                 isBrand: false,
                                                 id: categoryProvider
-                                                    .categoryList[categoryProvider
-                                                        .categorySelectedIndex]
+                                                    .supermarketList[
+                                                        categoryProvider
+                                                            .categorySelectedIndex]
                                                     .id
                                                     .toString(),
                                                 name: categoryProvider
-                                                    .categoryList[categoryProvider
-                                                        .categorySelectedIndex]
+                                                    .supermarketList[
+                                                        categoryProvider
+                                                            .categorySelectedIndex]
                                                     .name,
                                               )));
                                 },

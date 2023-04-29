@@ -19,7 +19,9 @@ class CategoryRepo {
 
   Future<ApiResponse> getSupermarketList() async {
     try {
-      final response = await dioClient.get(AppConstants.CATEGORIES_URI);
+      final response = await dioClient.get(AppConstants.Supermarket_URI);
+      print("xxxxxxxxxx");
+      print(response.data);
       return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));

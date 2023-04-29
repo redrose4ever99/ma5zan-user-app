@@ -107,8 +107,10 @@ class CartWidget extends StatelessWidget {
                                     }
                                   },
                                   child: Container(
-                                      width: 20,
-                                      height: 20,
+                                      width:
+                                          Dimensions.PADDING_SIZE_DEFAULT * 1.8,
+                                      height:
+                                          Dimensions.PADDING_SIZE_DEFAULT * 1.8,
                                       child: Image.asset(
                                         Images.delete,
                                         scale: .5,

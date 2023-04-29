@@ -464,8 +464,8 @@ class SquareButton extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            width: width / 4,
-            height: width / 4,
+            width: width / 4.5,
+            height: width / 4.5,
             padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -483,7 +483,7 @@ class SquareButton extends StatelessWidget {
                             builder: (context, cart, child) {
                           return CircleAvatar(
                             radius: 7,
-                            backgroundColor: ColorResources.RED,
+                            backgroundColor: ColorResources.getPrimary(context),
                             child: Text(count.toString(),
                                 style: titilliumSemiBold.copyWith(
                                   color: Theme.of(context).cardColor,

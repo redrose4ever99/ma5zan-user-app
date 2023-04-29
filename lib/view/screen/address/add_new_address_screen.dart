@@ -1,5 +1,3 @@
-import 'package:country_currency_pickers/country.dart';
-import 'package:country_currency_pickers/country_picker_dropdown.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_makzan_ecommerce/data/model/response/address_model.dart';
@@ -493,123 +491,60 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                                 SizedBox(
                                     height: Dimensions
                                         .PADDING_SIZE_DEFAULT_ADDRESS),
-                                Text(
-                                  getTranslated('zip', context),
-                                  style: robotoRegular.copyWith(
-                                      color: ColorResources.getHint(context)),
-                                ),
-                                SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
-
-                                Column(
-                                  children: [
-                                    Provider.of<SplashProvider>(context,
-                                                    listen: false)
-                                                .configModel
-                                                .deliveryZipCodeAreaRestriction ==
-                                            0
-                                        ? CustomTextField(
-                                            hintText:
-                                                getTranslated('zip', context),
-                                            textInputAction:
-                                                TextInputAction.next,
-                                            focusNode: _zipNode,
-                                            nextNode: _nameNode,
-                                            controller: _zipCodeController,
-                                          )
-                                        : DropdownSearch<RestrictedZipModel>(
-                                            items: locationProvider
-                                                .restrictedZipList,
-                                            itemAsString:
-                                                (RestrictedZipModel u) =>
-                                                    u.zipcode,
-                                            onChanged: (value) {
-                                              _zipCodeController.text =
-                                                  value.zipcode;
-                                            },
-                                            dropdownDecoratorProps:
-                                                DropDownDecoratorProps(
-                                              dropdownSearchDecoration:
-                                                  InputDecoration(
-                                                      labelText: "zip"),
-                                            ),
-                                          )
-                                  ],
-                                ),
-
-                                SizedBox(
-                                    height: Dimensions
-                                        .PADDING_SIZE_DEFAULT_ADDRESS),
-
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                Visibility(
+                                  visible: false,
                                   child: Text(
-                                    getTranslated('country', context),
+                                    getTranslated('zip', context),
                                     style: robotoRegular.copyWith(
                                         color: ColorResources.getHint(context)),
                                   ),
                                 ),
-                                Consumer<LocationProvider>(
-                                    builder: (context, locationProvider, _) {
-                                  return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Provider.of<SplashProvider>(context,
-                                                        listen: false)
-                                                    .configModel
-                                                    .deliveryCountryRestriction ==
-                                                1
-                                            ? DropdownSearch<String>(
-                                                popupProps: PopupProps.menu(
-                                                  showSelectedItems: true,
-                                                ),
-                                                items: locationProvider
-                                                    .restrictedCountryList,
-                                                dropdownDecoratorProps:
-                                                    DropDownDecoratorProps(
-                                                  dropdownSearchDecoration:
-                                                      InputDecoration(
-                                                    labelText: "country",
-                                                    hintText:
-                                                        "country in menu mode",
-                                                  ),
-                                                ),
-                                                onChanged: (value) {
-                                                  _countryCodeController.text =
-                                                      value;
-                                                  print('value===>$value');
-                                                },
-                                              )
-                                            : Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: Dimensions
-                                                        .PADDING_SIZE_SMALL,
-                                                    vertical: Dimensions
-                                                        .PADDING_SIZE_SMALL),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Theme.of(context)
-                                                            .hintColor
-                                                            .withOpacity(.25)),
-                                                    borderRadius: BorderRadius
-                                                        .circular(Dimensions
-                                                            .PADDING_SIZE_EXTRA_SMALL)),
-                                                child: CountryPickerDropdown(
-                                                  initialValue: country,
-                                                  itemBuilder:
-                                                      _buildDropdownItemForCountry,
-                                                  onValuePicked:
-                                                      (Country country) {
-                                                    print("${country.name}");
-                                                    _countryCodeController
-                                                        .text = country.name;
-                                                    //locationProvider.searchCountryController.text = country.name;
-                                                  },
-                                                ),
+
+                                Visibility(
+                                  visible: false,
+                                  child: Column(
+                                    children: [
+                                      Provider.of<SplashProvider>(context,
+                                                      listen: false)
+                                                  .configModel
+                                                  .deliveryZipCodeAreaRestriction ==
+                                              0
+                                          ? CustomTextField(
+                                              hintText:
+                                                  getTranslated('zip', context),
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              focusNode: _zipNode,
+                                              nextNode: _nameNode,
+                                              controller: _zipCodeController,
+                                            )
+                                          : DropdownSearch<RestrictedZipModel>(
+                                              items: locationProvider
+                                                  .restrictedZipList,
+                                              itemAsString:
+                                                  (RestrictedZipModel u) =>
+                                                      u.zipcode,
+                                              onChanged: (value) {
+                                                _zipCodeController.text =
+                                                    value.zipcode;
+                                              },
+                                              dropdownDecoratorProps:
+                                                  DropDownDecoratorProps(
+                                                dropdownSearchDecoration:
+                                                    InputDecoration(
+                                                        labelText: "zip"),
                                               ),
-                                        // CountrySearchDialog(),
-                                      ]);
-                                }),
+                                            )
+                                    ],
+                                  ),
+                                ),
+
+                                Visibility(
+                                  visible: false,
+                                  child: SizedBox(
+                                      height: Dimensions
+                                          .PADDING_SIZE_DEFAULT_ADDRESS),
+                                ),
 
                                 SizedBox(
                                     height: Dimensions
@@ -687,11 +622,9 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                                                     city:
                                                         _cityController.text ??
                                                             '',
-                                                    zip:
-                                                        _zipCodeController.text,
+                                                    zip: '97089',
                                                     country:
-                                                        _countryCodeController
-                                                            .text,
+                                                        'Syrian Arab Republic',
                                                     isBilling: _address ==
                                                             Address.billing
                                                         ? 1
@@ -878,7 +811,3 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
 }
 
 enum Address { shipping, billing }
-
-Widget _buildDropdownItemForCountry(Country country) => Container(
-      child: Container(width: 300, child: Text("${country.name}")),
-    );

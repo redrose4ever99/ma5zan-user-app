@@ -53,15 +53,12 @@ class AllCategoryScreen extends StatelessWidget {
                                       context,
                                       listen: false)
                                   .changeSelectedIndex(index),
-                              child: Visibility(
-                                visible: (_category.id != 2),
-                                child: CategoryItem(
-                                  title: _category.name,
-                                  icon: _category.icon,
-                                  isSelected:
-                                      categoryProvider.categorySelectedIndex ==
-                                          index,
-                                ),
+                              child: CategoryItem(
+                                title: _category.name,
+                                icon: _category.icon,
+                                isSelected:
+                                    categoryProvider.categorySelectedIndex ==
+                                        index,
                               ),
                             );
                           },
